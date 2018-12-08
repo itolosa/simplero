@@ -1,0 +1,31 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:5.7  
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: "ragnarok"
+      MYSQL_USER: "ro"
+      MYSQL_PASSWORD: "1234"
+      MYSQL_ROOT_PASSWORD: "1234"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+  rathena:
+    build: .
+    ports:
+      - "6900:6900"
+      - "6121:6121"
+      - "5121:5121"
+    environment:
+      MYSQL_PORT_3306_TCP: "true"
+      MYSQL_PORT_3306_TCP_ADDR: "mysql"
+      MYSQL_PORT_3306_TCP_PORT: "3306"
+      MYSQL_ENV_MYSQL_DATABASE: "ragnarok"
+      MYSQL_ENV_MYSQL_USER: "ro"
+      MYSQL_ENV_MYSQL_PASSWORD: "1234"
+      MYSQL_ENV_MYSQL_ROOT_PASSWORD: "1234"
+    depends_on:
+      - mysql
