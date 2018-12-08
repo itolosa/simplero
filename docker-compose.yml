@@ -27,5 +27,6 @@ services:
       MYSQL_ENV_MYSQL_USER: "ro"
       MYSQL_ENV_MYSQL_PASSWORD: "1234"
       MYSQL_ENV_MYSQL_ROOT_PASSWORD: "1234"
+      MYSQL_DROP_DB: "true"
     depends_on:
       - mysql

@@ -1,6 +1,7 @@
 #!/bin/sh
 #set -e
 
+echo "Waiting for mysql"
 ./wait-for-it.sh $MYSQL_PORT_3306_TCP_ADDR:$MYSQL_PORT_3306_TCP_PORT -t 30
 
 check_database_exist () {
